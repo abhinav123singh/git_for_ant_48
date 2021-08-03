@@ -1,0 +1,36 @@
+<project name="connection" default="REST_TRIGGER">
+
+<property file="C:\Windows\System32\config\systemprofile\AppData\Local\Jenkins\.jenkins\workspace\Job_Config_Connection\CONNECTIONs\Connection_Properties.properties"/>
+
+<target name="REST_TRIGGER" depends="REST_TRIGGER_INVOKE" >
+
+<exec executable="curl">
+<arg line="curl -X POST -u ${USERNAME_PASSWORD} -H X-HTTP-Method-Override:PATCH -H Content-Type:application/json -d @${REST_TRIGGER_PATH} https://oicintegrationinstance-bmcg1bx14wqj-bo.integration.ocp.oraclecloud.com/ic/api/integration/v1/connections/${REST_TRIGGER}"/></exec>
+</target>
+
+<target name="REST_TRIGGER_INVOKE" depends="FTP">
+
+<exec executable="curl">
+<arg line="curl -X POST -u ${USERNAME_PASSWORD} -H X-HTTP-Method-Override:PATCH -H Content-Type:application/json -d @${REST_TRIGGER_INVOKE_PATH} https://oicintegrationinstance-bmcg1bx14wqj-bo.integration.ocp.oraclecloud.com/ic/api/integration/v1/connections/${REST_TRIGGER_INVOKE}"/></exec>
+</target>
+
+<target name="FTP" depends="DB">
+
+<exec executable="curl">
+<arg line="curl -X POST -u ${USERNAME_PASSWORD} -H X-HTTP-Method-Override:PATCH -H Content-Type:application/json -d @${FTP_PATH} https://oicintegrationinstance-bmcg1bx14wqj-bo.integration.ocp.oraclecloud.com/ic/api/integration/v1/connections/${FTP}"/></exec>
+</target>
+
+<target name="DB" depends="SOAP">
+
+<exec executable="curl">
+<arg line="curl -X POST -u ${USERNAME_PASSWORD} -H X-HTTP-Method-Override:PATCH -H Content-Type:application/json -d @${DB_PATH} https://oicintegrationinstance-bmcg1bx14wqj-bo.integration.ocp.oraclecloud.com/ic/api/integration/v1/connections/${DB}"/></exec>
+</target>
+
+<target name="SOAP">
+
+<exec executable="curl">
+<arg line="curl -X POST -u ${USERNAME_PASSWORD} -H X-HTTP-Method-Override:PATCH -H Content-Type:application/json -d @${SOAP_PATH} https://oicintegrationinstance-bmcg1bx14wqj-bo.integration.ocp.oraclecloud.com/ic/api/integration/v1/connections/${SOAP}"/></exec>
+</target>
+
+</project>
+
